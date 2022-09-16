@@ -1,0 +1,33 @@
+# Project: snake
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = snake_private.res
+OBJ      = snaak.o $(RES)
+LINKOBJ  = snaak.o $(RES)
+LIBS     = -L"D:/dev/Dev-Cpp/MinGW64/lib" -L"D:/dev/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+INCS     = -I"D:/dev/Dev-Cpp/MinGW64/include" -I"D:/dev/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/dev/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"D:/dev/Dev-Cpp/MinGW64/include" -I"D:/dev/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/dev/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"D:/dev/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = snake.exe
+CXXFLAGS = $(CXXINCS) 
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+snaak.o: snaak.cpp
+	$(CPP) -c snaak.cpp -o snaak.o $(CXXFLAGS)
+
+snake_private.res: snake_private.rc resources.rc
+	$(WINDRES) -i snake_private.rc --input-format=rc -o snake_private.res -O coff 
+
